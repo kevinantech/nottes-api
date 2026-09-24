@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import { AppException } from '../../../config/exception';
+import { AppException, ValidationException } from '../../../config/exception';
 import { signUserToken } from '../../../config/jwt.util';
 import { UserRepository } from '../domain/user.repository';
 import {
@@ -25,12 +25,8 @@ export class UserService {
   constructor(private readonly userRepository: UserRepository) {}
 
   public async register(raw: RegisterUserParams): Promise<void> {
-    const { data: input, error: _ } = RegisterUserInputSchema.safeParse(raw);
-
-    if (!input) {
-      // TODO: Pass the error details to the exception for better debugging.
-      throw new AppException('Datos de registro inválidos');
-    }
+    const { data: input, error } = RegisterUserInputSchema.safeParse(raw);
+    if (!input) throw ValidationException.fromZod(error);
 
     // Hash password
     const salt = await bcrypt.genSalt(10);
@@ -49,15 +45,11 @@ export class UserService {
   }
 
   public async login(raw: LoginUserParams): Promise<{ token: string }> {
-    const { data: input, error: _ } = LoginUserInputSchema.safeParse({
+    const { data: input, error } = LoginUserInputSchema.safeParse({
       email: raw.email,
       password: raw.password,
     });
-
-    if (!input) {
-      // TODO: Pass the error details to the exception for better debugging.
-      throw new AppException('Datos de inicio de sesión inválidos');
-    }
+    if (!input) throw ValidationException.fromZod(error);
 
     const userFound = await this.userRepository.findUserByEmail(input.email);
     if (!userFound) throw new AppException(invalidLoginMessage);

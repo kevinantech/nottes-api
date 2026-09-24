@@ -60,6 +60,7 @@ Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.nqsfs7w.mongodb.net
 
 ### Futuras mejoras
 
+- Diseñar e implementar un Logger.
 - Añadir trazablidad a ciertos eventos mediante un Logger.
 
 ### Documentación Relacionada
