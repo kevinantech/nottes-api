@@ -8,7 +8,7 @@ const TaskSchema = new Schema<ITask>(
       required: true,
       unique: true,
     },
-    name: {
+    title: {
       type: String,
       required: true,
     },
@@ -21,13 +21,15 @@ const TaskSchema = new Schema<ITask>(
       type: Date,
       required: true,
     },
-    projectId: {
-      type: String,
-      required: true,
-    },
     authorId: {
       type: String,
       required: true,
+      ref: 'users',
+    },
+    projectId: {
+      type: String,
+      required: true,
+      ref: 'projects',
     },
   },
   {

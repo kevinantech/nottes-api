@@ -2,12 +2,7 @@
  * https://www.apollographql.com/docs/apollo-server/getting-started#step-3-define-your-graphql-schema
  */
 const typeDefs = `#graphql 
-	# Base Response
-	# type Response {
-		# id: id!
-	# }
-	
-	# For register a new user
+	# USER
 	input RegisterUserInput {
 		name: String!
 		email: String!
@@ -24,55 +19,49 @@ const typeDefs = `#graphql
 	}
 	
 	# PROJECT
-	
-	# input CreateProjectInput {
-		# name: String!
-	#}
+	input CreateProjectInput {
+		name: String!
+	}
 
-	# input UpdateProjectInput {
-		# id: id!
-		# name: String!
-	# }
+	 input UpdateProjectInput {
+		id: ID!
+		title: String!
+		projectId: ID!
+	 }
 
-	# type Project {
-		# id: id!
-		# name: String
-	# }
+	type Project {
+		id: ID!
+		title: String!
+	}
 
 	# TASK
-	
-	# input GetTasksInput {
-		# projectId: id!
-	# }
+	input GetTasksInput {
+		projectId: ID!
+	}
 
-	# input CreateTaskInput {
-		# name: String!
-		# projectId: id!
-	# }
+	input CreateTaskInput {
+		title: String!
+		projectId: ID!
+	}
 	
-	# input UpdateTaskInput {
-		# id: id!
-		# name: String
-		# status: Boolean!
-	# }
+	input UpdateTaskInput {
+		id: ID!
+		title: String
+		status: Boolean!
+	}
 	
-	# type Task {
-		# id: id!
-		# name: String
-		# status: Boolean
-		# projectId: id
-	# }
+	type Task {
+		id: ID!
+		title: String
+		status: Boolean
+		projectId: ID
+	}
 
 	# RESOLVERS
 
 	type Query {
-
-		getUsers: [Token]
-		# PROJECT
-		# GetProjects: [Project]
-
-		# TASK
-		# GetTasks(input: GetTasksInput): [Task]
+		getProjects: [Project]
+		getTasks(input: GetTasksInput): [Task]
 	}
 
 	type Mutation {
@@ -80,15 +69,15 @@ const typeDefs = `#graphql
 		registerUser(input: RegisterUserInput): Boolean
 		login(input: LoginUserInput): Token
 
-		# PROJECT
-		# CreateProject(input: CreateProjectInput): Project
-		# UpdateProject(input: UpdateProjectInput): Project
-		# DeleteProject(id: id!): Response 
+		# Project
+		createProject(input: CreateProjectInput): Project
+		updateProject(input: UpdateProjectInput): Project
+		deleteProject(id: ID!): Project 
 
-		# TASK
-		# CreateTask(input: CreateTaskInput): Task
-		# UpdateTask(input: UpdateTaskInput): Task
-		# DeleteTask(id: id!): Response
+		# Task
+		createTask(input: CreateTaskInput): Task
+		updateTask(input: UpdateTaskInput): Task
+		deleteTask(id: ID!): Task
 
 	}
 `;

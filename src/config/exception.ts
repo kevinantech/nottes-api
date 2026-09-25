@@ -18,7 +18,6 @@ export class AppException extends Error {
     public readonly code: string = 'APP_ERROR',
   ) {
     super(message);
-    this.name = this.constructor.name;
   }
 
   toResponse(): ErrorResponse {

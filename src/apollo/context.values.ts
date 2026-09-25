@@ -7,7 +7,7 @@ const verifyToken = (token: string | undefined) => {
       const userPayload = jwt.verify(token, <string>process.env.SECRET);
       return userPayload;
     } catch (e) {
-      console.log();
+      console.log(e);
     }
   }
   return;

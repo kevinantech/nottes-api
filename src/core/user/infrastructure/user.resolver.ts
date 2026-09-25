@@ -11,8 +11,7 @@ export class UserResolver {
   }
 
   public async login(_parent: any, { input }: any) {
-    const data = await this.useCases.login(input);
-    return data;
+    return await this.useCases.login(input);
   }
 }
 

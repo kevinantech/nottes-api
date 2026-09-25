@@ -11,11 +11,11 @@ export const RegisterUserInputSchema = z.object({
     .trim()
     .min(
       MIN_NAME_LENGTH,
-      `El nombre debe tener entre ${MIN_NAME_LENGTH} y ${MAX_NAME_LENGTH} caracteres`,
+      `El nombre debe tener debe tener al menos ${MIN_NAME_LENGTH} caracteres`,
     )
     .max(
       MAX_NAME_LENGTH,
-      `El nombre debe tener entre ${MIN_NAME_LENGTH} y ${MAX_NAME_LENGTH} caracteres`,
+      `El nombre no puede exceder ${MAX_NAME_LENGTH} caracteres`,
     ),
 
   email: z.email({ message: 'El correo electrónico no es válido' }),
@@ -37,5 +37,5 @@ export const LoginUserInputSchema = z.object({
   password: z.string().min(1, 'La contraseña es requerida'),
 });
 
-export type RegisterInput = z.infer<typeof RegisterUserInputSchema>;
-export type LoginInput = z.infer<typeof LoginUserInputSchema>;
+export type RegisterUserInput = z.infer<typeof RegisterUserInputSchema>;
+export type LoginUserInput = z.infer<typeof LoginUserInputSchema>;

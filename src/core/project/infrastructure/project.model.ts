@@ -1,16 +1,18 @@
-import { Schema, model } from 'mongoose';
+import { Document, LeanDocument, Schema, model } from 'mongoose';
 import { IProject } from '../domain/project.entity';
+
+export type ProjectModelType = LeanDocument<IProject & Document>;
 
 const ProjectSchema = new Schema<IProject>(
   {
     id: {
       type: String,
-      require: true,
+      required: true,
       unique: true,
     },
-    name: {
+    title: {
       type: String,
-      require: true,
+      required: true,
       trim: true,
     },
     created: {
@@ -20,13 +22,13 @@ const ProjectSchema = new Schema<IProject>(
     authorId: {
       type: String,
       required: true,
-      ref: 'User',
+      ref: 'users',
     },
   },
   {
     versionKey: false,
   },
 );
-const ProjectModel = model('Projects', ProjectSchema);
+const ProjectModel = model('projects', ProjectSchema);
 export { ProjectModel };
 

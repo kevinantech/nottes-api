@@ -1,14 +1,15 @@
 import { ITask } from './task.entity';
 
-export interface TaskRepository {
-  findTaskById(id: string): Promise<ITask | null>;
-  findTasksByProjectId(projectId: string): Promise<ITask[]>;
-  registerTask(task: ITask): Promise<ITask | void>;
-  updateTask(
-    id: string,
-    name?: string,
-    status?: boolean,
-  ): Promise<ITask | null>;
-  deleteTask(id: string): Promise<ITask | null>;
-  deleteTasksByProjectId(projectId: string): Promise<any>;
+export type UpdateTaskPayload = Partial<
+  Pick<ITask, 'title' | 'status' | 'projectId'>
+>;
+
+export interface ITaskRepository {
+  findById(id: string): Promise<ITask | null>;
+  findByProjectId(projectId: string): Promise<ITask[]>;
+  save(task: ITask): Promise<ITask>;
+  updateById(id: string, payload: UpdateTaskPayload): Promise<ITask | null>;
+  deleteById(id: string): Promise<ITask | null>;
+  deleteByProjectId(projectId: string): Promise<void>;
 }
+
