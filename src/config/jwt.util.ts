@@ -1,16 +1,7 @@
 import jwt from 'jsonwebtoken';
 
-type UserPayload = {
-  id: string;
-  email: string;
-};
-
-const signUserToken = (
-  payload: UserPayload,
-  secret: string,
-  expiration: string,
-) => {
-  return jwt.sign(payload, secret, { expiresIn: expiration });
-};
-
-export { signUserToken };
+export class JwtUtil {
+  static sign<T extends {}>(payload: T, secret: string, expiration: string) {
+    return jwt.sign(payload, secret, { expiresIn: expiration });
+  }
+}

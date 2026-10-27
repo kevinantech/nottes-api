@@ -1,5 +1,6 @@
 import { Schema, model } from 'mongoose';
 import { IUser } from '../domain/user.entity';
+import { UserRole } from '../domain/role.enum';
 
 const UserSchema = new Schema<IUser>(
   {
@@ -7,6 +8,11 @@ const UserSchema = new Schema<IUser>(
       type: String,
       unique: true,
       required: true,
+    },
+    role: {
+      type: String,
+      enum: UserRole,
+      default: UserRole.USER,
     },
     name: {
       type: String,
@@ -21,14 +27,18 @@ const UserSchema = new Schema<IUser>(
       type: String,
       required: true,
     },
-    registration_date: {
+    createdAt: {
       type: Date,
       required: true,
+    },
+    projectCount: {
+      type: Number,
+      default: 0,
     },
   },
   {
     versionKey: false,
-    timestamps: true,
+    timestamps: false,
   },
 );
 const UserModel = model('users', UserSchema);

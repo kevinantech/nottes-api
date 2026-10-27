@@ -11,8 +11,6 @@ Antes de conectar la app, crea un rol con permisos específicos para tu base de 
 5. Marca **Apply to any collection** si el rol debe aplicar a todas las colecciones de esa base de datos.
 6. Click en **Add Custom Role**.
 
-![Configuración del Custom Role en MongoDB](docs/images/mongo_custom_role.png)
-
 #### 2. Crear el usuario con ese rol
 
 1. Ve a **Database Access → Database Users → Add New Database User**.

@@ -2,26 +2,36 @@
   "name": "nottes-api",
   "version": "0.0.1",
   "description": "",
-  "type": "module",
   "scripts": {
     "build": "rm -rf dist && tsc && tsc-alias",
     "start": "npm run build && node ./dist/index.js",
-    "dev": "tsx watch --env-file=.env src/index.ts"
+    "dev": "tsx watch --env-file=.env src/index.ts",
+    "seed": "tsx scripts/seed.ts",
+    "auser": "tsx scripts/auser.ts",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@apollo/server": "5.5.1",
+    "@graphql-tools/schema": "11.0.6",
     "bcryptjs": "3.0.3",
     "dotenv": "18.0.2",
     "graphql": "17.0.2",
+    "graphql-import-node": "^0.0.5",
     "jsonwebtoken": "9.0.3",
     "mongoose": "9.10.1",
+    "reflect-metadata": "0.2.2",
+    "tsyringe": "4.10.0",
     "uuid": "14.0.2",
+    "winston": "3.19.0",
     "zod": "4.6.5"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "7.4.6",
+    "@graphql-codegen/typescript": "^6.1.2",
+    "@graphql-codegen/typescript-resolvers": "^6.1.1",
     "@types/jsonwebtoken": "9.0.1",
     "@types/node": "26.6.2",
     "@typescript-eslint/eslint-plugin": "^5.49.0",

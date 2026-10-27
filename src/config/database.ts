@@ -10,9 +10,13 @@ async function connectDatabase(): Promise<void> {
      */
     if (process.env.NODE_ENV !== 'production') {
       dns.setServers(['8.8.8.8', '1.1.1.1']);
+
+      // Para debuguear las consultas de Mongoose
+      mongoose.set('debug', true);
     }
 
     const uri = <string>process.env.MONGODB_URI;
+
     await mongoose.connect(uri);
   } catch (error) {
     console.log(error);

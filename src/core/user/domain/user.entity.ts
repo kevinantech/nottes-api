@@ -1,14 +1,21 @@
+import { UserRole } from './role.enum';
+
 export interface IUser {
   id: string;
+  role: UserRole;
   name: string;
   email: string;
   password_hash: string;
-  registration_date: Date;
+  projectCount: number;
+  createdAt: Date;
 }
 
 export interface IUserResponse {
   id: string;
+  role: UserRole;
   name: string;
   email: string;
-  registration_date: Date;
+  projectCount: number;
+  createdAt: string;
 }
+

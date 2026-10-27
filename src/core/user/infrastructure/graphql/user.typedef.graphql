@@ -1,0 +1,26 @@
+type User {
+  id: ID!
+  role: String!
+  name: String!
+  email: String!
+  projectCount: Int!
+  createdAt: String!
+}
+
+type Response {
+  success: Boolean!
+}
+
+type AuthPayload {
+  token: String!
+}
+
+type Query {
+  me: User!
+}
+
+type Mutation {
+  registerUser(name: String!, email: String!, password: String!): Response!
+  loginUser(email: String!, password: String!): AuthPayload!
+  updateProfile(name: String): User!
+}
