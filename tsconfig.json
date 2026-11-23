@@ -13,6 +13,7 @@
   },
   "tsc-alias": {
     "resolveFullPaths": true
-  }
+  },
+  "include": ["src/**/*.ts"]
 }
 
