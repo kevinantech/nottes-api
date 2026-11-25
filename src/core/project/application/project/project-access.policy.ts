@@ -31,7 +31,11 @@ const ROLE_PERMISSIONS: Record<MemberRole, ReadonlySet<ProjectPermission>> = {
   [MemberRole.VIEWER]: new Set([ProjectPermission.PROJECT_LEAVE]),
 };
 
-// Roles que un actor puede gestionar (asignar o modificar) según su rol actual. Por ejemplo, un OWNER puede asignar o modificar los roles de ADMIN, MEMBER y VIEWER, pero no puede asignar o modificar el rol de OWNER.
+/**
+ * Matriz compartida de roles que un actor puede gestionar (asignar o modificar) según su rol.
+ * Si las reglas difieren a futuro (ej. un ADMIN puede asignar ADMIN pero no
+ * cambiar el rol de otro ADMIN), dividir en ASSIGNABLE_ROLES y MODIFIABLE_ROLES.
+ */
 const MANAGEABLE_ROLES: Record<MemberRole, ReadonlySet<MemberRole>> = {
   [MemberRole.OWNER]: new Set([
     MemberRole.ADMIN,
