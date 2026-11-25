@@ -2,7 +2,7 @@ import { TransactionContext } from '../../../shared/domain/unit-of-work.interfac
 import { IMember } from './member.entity';
 import { MemberRole } from './member-role.enum';
 
-export interface IProjectMemberRepository {
+export interface IMemberRepository {
   findByProjectId(projectId: string): Promise<IMember[]>;
   findByProjectAndUser(
     projectId: string,

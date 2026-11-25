@@ -1,15 +1,15 @@
 import { z } from 'zod';
 import { MemberRole } from '../../../domain/member/member-role.enum';
 
-const AssignableProjectRoleSchema = z.enum([
+const AssignableMemberRoleSchema = z.enum([
   MemberRole.ADMIN,
   MemberRole.MEMBER,
   MemberRole.VIEWER,
 ]);
 
-export const AddProjectMemberSchema = z.object({
-  userId: z.string().trim().min(1, 'El usuario es requerido'),
-  role: AssignableProjectRoleSchema.default(MemberRole.MEMBER),
+export const AddMemberSchema = z.object({
+  userId: z.uuid('El usuario debe ser valido'),
+  role: AssignableMemberRoleSchema,
 });
 
-export type AddProjectMemberInput = z.infer<typeof AddProjectMemberSchema>;
+export type AddMemberInput = z.infer<typeof AddMemberSchema>;

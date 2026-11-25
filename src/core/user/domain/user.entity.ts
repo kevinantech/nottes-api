@@ -6,7 +6,7 @@ export interface IUser {
   name: string;
   email: string;
   password_hash: string;
-  projectCount: number;
+  membershipCount: number;
   createdAt: Date;
 }
 
@@ -15,7 +15,7 @@ export interface IUserResponse {
   role: UserRole;
   name: string;
   email: string;
-  projectCount: number;
+  membershipCount: number;
   createdAt: string;
 }
 

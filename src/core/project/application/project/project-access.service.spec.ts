@@ -2,7 +2,7 @@ import { it, describe, vi, expect } from 'vitest';
 import { IProject } from '../../domain/project/project.entity';
 import { IMember } from '../../domain/member/member.entity';
 import { MemberRole } from '../../domain/member/member-role.enum';
-import { IProjectRepository } from '../../domain/project/project.repository';
+import { IProjectRepository } from '../../domain/project/project.repository.interface';
 import { IMemberRepository } from '../../domain/member/member.repository.interface';
 import { ProjectAccessService } from './project-access.service';
 import { AppException } from '../../../shared/domain/exception';

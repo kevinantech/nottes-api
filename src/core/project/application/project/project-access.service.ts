@@ -7,7 +7,7 @@ import {
   ProjectPermission,
 } from './project-access.policy';
 import { IProject } from '../../domain/project/project.entity';
-import { IProjectRepository } from '../../domain/project/project.repository';
+import { IProjectRepository } from '../../domain/project/project.repository.interface';
 
 type ProjectAccess = {
   project: IProject;

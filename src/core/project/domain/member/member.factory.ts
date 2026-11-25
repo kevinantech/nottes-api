@@ -24,6 +24,15 @@ export class Member implements IMember {
     this.invitedBy = invitedBy;
   }
 
+  static create(
+    projectId: string,
+    userId: string,
+    role: MemberRole,
+    invitedBy?: string,
+  ): Member {
+    return new Member(projectId, userId, role, invitedBy);
+  }
+
   static createOwner(projectId: string, ownerId: string): Member {
     return new Member(projectId, ownerId, MemberRole.OWNER);
   }

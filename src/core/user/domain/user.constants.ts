@@ -1,1 +1,1 @@
-export const MAX_OWNED_PROJECTS = 10;
+export const MAX_MEMBERSHIP_PROJECTS = 10;

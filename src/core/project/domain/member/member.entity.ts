@@ -9,12 +9,3 @@ export interface IMember {
   invitedBy?: string;
 }
 
-export interface IMemberResponse {
-  id: string;
-  projectId: string;
-  userId: string;
-  role: MemberRole;
-  joinedAt: string;
-  invitedBy?: string;
-}
-
