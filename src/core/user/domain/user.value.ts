@@ -8,7 +8,7 @@ export class User implements IUser {
   name: string;
   email: string;
   password_hash: string;
-  projectCount: number;
+  membershipCount: number;
   createdAt: Date;
 
   constructor(name: string, email: string, password_hash: string) {
@@ -17,7 +17,7 @@ export class User implements IUser {
     this.name = name;
     this.email = email;
     this.password_hash = password_hash;
-    this.projectCount = 0;
+    this.membershipCount = 0;
     this.createdAt = new Date();
   }
 }

@@ -31,7 +31,7 @@ const UserSchema = new Schema<IUser>(
       type: Date,
       required: true,
     },
-    projectCount: {
+    membershipCount: {
       type: Number,
       default: 0,
     },

@@ -3,7 +3,7 @@ type User {
   role: String!
   name: String!
   email: String!
-  projectCount: Int!
+  membershipCount: Int!
   createdAt: String!
 }
 
@@ -20,7 +20,12 @@ type Query {
 }
 
 type Mutation {
-  registerUser(name: String!, email: String!, password: String!): Response!
+  registerUser(
+    name: String!
+    email: String!
+    password: String!
+    confirmPassword: String!
+  ): Response!
   loginUser(email: String!, password: String!): AuthPayload!
-  updateProfile(name: String): User!
+  updateProfile(name: String!): User!
 }

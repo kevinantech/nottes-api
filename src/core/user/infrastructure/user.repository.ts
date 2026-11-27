@@ -1,5 +1,4 @@
 import { Injectable } from '../../../di';
-import { TransactionContext } from '../../shared/domain/unit-of-work.interface';
 import { toSession } from '../../shared/infrastructure/mongo-unit-of-work';
 import { IUser } from '../domain/user.entity';
 import { IUserRepository } from '../domain/user.repository.interface';
@@ -7,12 +6,12 @@ import { UserModel } from './user.model';
 
 @Injectable()
 export class UserRepository implements IUserRepository {
-  async findById(id: string): Promise<IUser | null> {
-    return await UserModel.findOne({ id }).lean().exec();
+  async save(user: IUser): Promise<void> {
+    await new UserModel(user).save();
   }
 
-  async findByEmail(email: string): Promise<IUser | null> {
-    return await UserModel.findOne({ email }).lean().exec();
+  async findById(id: string): Promise<IUser | null> {
+    return await UserModel.findOne({ id }).lean().exec();
   }
 
   async updateById(
@@ -30,18 +29,23 @@ export class UserRepository implements IUserRepository {
     return result;
   }
 
-  async save(user: IUser): Promise<void> {
-    await new UserModel(user).save();
+  async findByEmail(email: string): Promise<IUser | null> {
+    return await UserModel.findOne({ email }).lean().exec();
   }
 
-  async reserveOwnedProjectSlot(
-    userId: string,
-    max: number,
-    tx?: TransactionContext,
-  ): Promise<boolean> {
+  async reserveMembershipSlot(userId, max, tx?) {
     const { modifiedCount } = await UserModel.updateOne(
-      { id: userId, projectCount: { $lt: max } }, // lt (less than), similar al filtro de drizzle.
-      { $inc: { projectCount: 1 } },
+      { id: userId, membershipCount: { $lt: max } },
+      { $inc: { membershipCount: 1 } },
+      { session: toSession(tx) },
+    );
+    return modifiedCount === 1;
+  }
+
+  async releaseMembershipSlot(userId, tx?) {
+    const { modifiedCount } = await UserModel.updateOne(
+      { id: userId, membershipCount: { $gt: 0 } },
+      { $inc: { membershipCount: -1 } },
       { session: toSession(tx) },
     );
     return modifiedCount === 1;

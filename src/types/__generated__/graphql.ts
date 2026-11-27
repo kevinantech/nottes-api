@@ -47,6 +47,7 @@ export type MutationLoginUserArgs = {
 
 
 export type MutationRegisterUserArgs = {
+  confirmPassword: Scalars['String']['input'];
   email: Scalars['String']['input'];
   name: Scalars['String']['input'];
   password: Scalars['String']['input'];
@@ -54,7 +55,7 @@ export type MutationRegisterUserArgs = {
 
 
 export type MutationUpdateProfileArgs = {
-  name?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
 };
 
 export type Project = {
@@ -81,8 +82,8 @@ export type User = {
   createdAt: Scalars['String']['output'];
   email: Scalars['String']['output'];
   id: Scalars['ID']['output'];
+  membershipCount: Scalars['Int']['output'];
   name: Scalars['String']['output'];
-  projectCount: Scalars['Int']['output'];
   role: Scalars['String']['output'];
 };
 
@@ -193,8 +194,8 @@ export type MutationResolvers<ContextType = Context, ParentType extends Resolver
   createProject?: Resolver<ResolversTypes['Project'], ParentType, ContextType, RequireFields<MutationCreateProjectArgs, 'description' | 'title'>>;
   editProject?: Resolver<ResolversTypes['Project'], ParentType, ContextType, RequireFields<MutationEditProjectArgs, 'id'>>;
   loginUser?: Resolver<ResolversTypes['AuthPayload'], ParentType, ContextType, RequireFields<MutationLoginUserArgs, 'email' | 'password'>>;
-  registerUser?: Resolver<ResolversTypes['Response'], ParentType, ContextType, RequireFields<MutationRegisterUserArgs, 'email' | 'name' | 'password'>>;
-  updateProfile?: Resolver<ResolversTypes['User'], ParentType, ContextType, Partial<MutationUpdateProfileArgs>>;
+  registerUser?: Resolver<ResolversTypes['Response'], ParentType, ContextType, RequireFields<MutationRegisterUserArgs, 'confirmPassword' | 'email' | 'name' | 'password'>>;
+  updateProfile?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationUpdateProfileArgs, 'name'>>;
 };
 
 export type ProjectResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Project'] = ResolversParentTypes['Project']> = {
@@ -217,8 +218,8 @@ export type UserResolvers<ContextType = Context, ParentType extends ResolversPar
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  membershipCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  projectCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   role?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
 };
 

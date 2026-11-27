@@ -1,7 +1,7 @@
+import 'reflect-metadata'; // No remover, el contenedor de dependencias depende de él.
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 import dotenv from 'dotenv';
-import 'reflect-metadata'; // No remover, el contenedor de dependencias depende de él.
 import { validateToken } from './apollo/context';
 import formatError from './apollo/formatError';
 import { errorHttpStatusPlugin, errorLoggerPlugin } from './apollo/plugin';
